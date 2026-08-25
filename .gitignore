@@ -1,0 +1,9 @@
+# Carpetas de compilación e IDEs
+/build/
+/dist/
+/nbproject/private/
+.vscode/
+
+# Configuración personal o credenciales locales
+*.log
+*.class
