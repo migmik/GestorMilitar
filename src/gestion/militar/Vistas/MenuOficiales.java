@@ -98,4 +98,10 @@ public class MenuOficiales extends MenuPersonaBase {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    @Override
+    protected void ejecutarActualización(int codigo, CamposPersonaEnum campo, String nuevoValor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ejecutarActualización'");
+    }
 }

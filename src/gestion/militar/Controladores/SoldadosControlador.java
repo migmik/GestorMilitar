@@ -5,6 +5,7 @@ import java.util.List;
 import gestion.militar.DAOS.SoldadoDAO;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Modelos.Soldado;
+import gestion.militar.Vistas.CamposPersonaEnum;
 
 public class SoldadosControlador {
 
@@ -19,8 +20,19 @@ public class SoldadosControlador {
         soldadoDAO.crear(soldado);
     }
 
-    public void modificar(int codigo, String nuevoDNI, String nuevoNombre, String nuevoApellido) {
-        Soldado soldado = new Soldado(codigo, nuevoDNI, nuevoApellido, nuevoNombre);
+    public void modificar(int codigo, CamposPersonaEnum campo, String nuevoValor) {
+        Soldado soldado = consultarPorCodigo(codigo);
+        switch (campo) {
+            case DNI:
+                soldado.setDni(nuevoValor);
+                break;
+            case NOMBRE:
+                soldado.setNombre(nuevoValor);
+                break;
+            case APELLIDO:
+                soldado.setApellido(nuevoValor);
+                break;
+        }
         soldadoDAO.actualizar(soldado);
     }
 

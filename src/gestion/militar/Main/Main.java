@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import gestion.militar.BaseDeDatos.ConfiguracionBD;
+import gestion.militar.Controladores.SoldadosControlador;
 import gestion.militar.DAOS.CuartelDAO;
 import gestion.militar.DAOS.OficialDAO;
 import gestion.militar.DAOS.SoldadoDAO;
@@ -24,14 +25,20 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        // conexion
+        ConfiguracionBD configuracionBD = new ConfiguracionBD();
+        Connection conexion = configuracionBD.conexion();
+        // daos
+        SoldadoDAO soldadoDAO = new SoldadoDAO(conexion);
+        // controladores
+        SoldadosControlador soldadosControlador = new SoldadosControlador(soldadoDAO);
         // vistas
         MenuAsignaciones menuAsignaciones = new MenuAsignaciones(scanner);
         MenuConsultas menuConsultas = new MenuConsultas(scanner);
         MenuCuarteles menuCuarteles = new MenuCuarteles(scanner);
         MenuOficiales menuOficiales = new MenuOficiales(scanner);
         MenuReservas menuReservas = new MenuReservas(scanner);
-        MenuSoldados menuSoldados = new MenuSoldados(scanner);
+        MenuSoldados menuSoldados = new MenuSoldados(scanner, soldadosControlador);
         MenuPrincipal menuPrincipal = new MenuPrincipal(scanner, menuAsignaciones, menuConsultas, menuOficiales,
                 menuReservas, menuSoldados, menuCuarteles);
 

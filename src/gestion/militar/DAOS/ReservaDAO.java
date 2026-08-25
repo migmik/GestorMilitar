@@ -81,7 +81,7 @@ public class ReservaDAO implements GenericoDAO<Reserva, Integer> {
                 PreparedStatement sentencia = conexion.prepareStatement(consulta);
                 ResultSet resultSet = sentencia.executeQuery()) {
             while (resultSet.next()) {
-                Soldado soldado = new Soldado(resultSet.getInt("soldados_codigos"), resultSet.getString("s_dni"),
+                Soldado soldado = new Soldado(resultSet.getInt("soldados_codigo"), resultSet.getString("s_dni"),
                         resultSet.getString("s_apellido"), resultSet.getString("s_nombre"));
                 Cuartel cuartel = new Cuartel(
                         resultSet.getInt("cuarteles_codigo"),

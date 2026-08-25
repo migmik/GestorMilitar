@@ -107,11 +107,7 @@ public class MenuSoldados extends MenuPersonaBase {
     }
 
     @Override
-    protected void ejecutarActualización(int codigo, int opcionCampo, String nuevoValor) {
-        switch (opcionCampo) {
-            case 1 -> soldadosControlador.modificarDni(codigo, nuevoValor);
-            case 2 -> soldadosControlador.modificarNombre(codigo, nuevoValor);
-            case 3 -> soldadosControlador.modificarApellido(codigo, nuevoValor);
-        }
+    protected void ejecutarActualización(int codigo, CamposPersonaEnum campo, String nuevoValor) {
+        soldadosControlador.modificar(codigo, campo, nuevoValor);
     }
 }
