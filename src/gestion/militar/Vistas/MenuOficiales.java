@@ -1,11 +1,22 @@
 package gestion.militar.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import gestion.militar.Controladores.OficialesControlador;
+import gestion.militar.Enums.CamposPersonaEnum;
+import gestion.militar.Excepciones.EntidadDuplicadaException;
+import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Modelos.Oficial;
 
 public class MenuOficiales extends MenuPersonaBase {
 
-    public MenuOficiales(Scanner scanner) {
+    OficialesControlador oficialesControlador;
+
+    public MenuOficiales(Scanner scanner, OficialesControlador oficialesControlador) {
         super(scanner);
+        this.oficialesControlador = oficialesControlador;
     }
 
     @Override
@@ -49,24 +60,25 @@ public class MenuOficiales extends MenuPersonaBase {
         String dni = leerTexto("Ingrese DNI del oficial: ");
         String apellido = leerTexto("Ingrese apellido del oficial: ");
         String nombre = leerTexto("Ingrese nombre del oficial: ");
-
         try {
-            // llamada al servicio
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            oficialesControlador.ingresar(dni, apellido, nombre);
+            System.out.println("Oficial registrado con exito!");
+        } catch (EntidadDuplicadaException | IllegalArgumentException e) {
+            System.out.println("No se pudo registrar: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void modificar() {
         listar();
         int codigo = leerEntero("Ingrese codigo de oficial a modificar: ");
-        String dni = leerTexto("Ingrese nuevo DNI: ");
-        String apellido = leerTexto("Ingrese nuevo apellido: ");
-        String nombre = leerTexto("Ingrese nuevo nombre: ");
-
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            Oficial oficialExistente = oficialesControlador.consultarPorCodigo(codigo);
+            System.out.println("Modificacion del oficial: " + oficialExistente.mostrarInfo());
+            gestionarEdicionPersona(codigo);
+
+        } catch (RuntimeException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
@@ -75,33 +87,42 @@ public class MenuOficiales extends MenuPersonaBase {
         int codigo = leerEntero("Ingrese codigo de oficial: ");
 
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            Oficial oficial = oficialesControlador.consultarPorCodigo(codigo);
+            System.out.println("Oficial encontrado: \n" + oficial.mostrarInfo());
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void listar() {
+        List<Oficial> oficiales = new ArrayList<>();
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            oficiales = oficialesControlador.listarTodos();
+            System.out.println("Lista de oficiales:\n");
+            oficiales.forEach(System.out::println);
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void eliminar() {
         int codigo = leerEntero("Ingrese codigo de oficial a eliminar: ");
-
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            oficialesControlador.eliminar(codigo);
+            System.out.println("Oficial eliminado con exito.");
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     @Override
     protected void ejecutarActualización(int codigo, CamposPersonaEnum campo, String nuevoValor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ejecutarActualización'");
+        oficialesControlador.modificar(codigo, campo, nuevoValor);
     }
 }

@@ -1,4 +1,4 @@
-package gestion.militar.Vistas;
+package gestion.militar.Enums;
 
 public enum CamposPersonaEnum {
     DNI("DNI"), NOMBRE("Nombre"), APELLIDO("Apellido");

@@ -1,9 +1,13 @@
 package gestion.militar.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import gestion.militar.Controladores.SoldadosControlador;
+import gestion.militar.Enums.CamposPersonaEnum;
 import gestion.militar.Excepciones.EntidadDuplicadaException;
+import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Modelos.Soldado;
 
 public class MenuSoldados extends MenuPersonaBase {
@@ -74,7 +78,7 @@ public class MenuSoldados extends MenuPersonaBase {
             gestionarEdicionPersona(codigo);
 
         } catch (RuntimeException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
@@ -82,27 +86,37 @@ public class MenuSoldados extends MenuPersonaBase {
         int codigo = leerEntero("Ingrese codigo de soldado: ");
 
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            Soldado soldado = soldadosControlador.consultarPorCodigo(codigo);
+            System.out.println("Soldado encontrado: \n" + soldado.mostrarInfo());
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void listar() {
+        List<Soldado> soldados = new ArrayList<>();
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            soldados = soldadosControlador.listarTodos();
+            System.out.println("Lista de soldado:\n");
+            soldados.forEach(System.out::println);
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void eliminar() {
         int codigo = leerEntero("Ingrese codigo de soldado a eliminar: ");
-
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            soldadosControlador.eliminar(codigo);
+            System.out.println("Soldado eliminado con exito.");
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 

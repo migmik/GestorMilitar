@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import gestion.militar.Excepciones.EntidadDuplicadaException;
+import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Modelos.Persona;
 
 public abstract class PersonaDAO<T extends Persona>
@@ -44,9 +47,10 @@ public abstract class PersonaDAO<T extends Persona>
                 }
             }
 
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new EntidadDuplicadaException("Ya existe una persona con ese DNI.");
         } catch (SQLException e) {
-            System.out.println("Error al guardar la persona: "
-                    + e.getMessage());
+            throw new RuntimeException("Error al guardar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -63,7 +67,7 @@ public abstract class PersonaDAO<T extends Persona>
             }
 
         } catch (SQLException e) {
-            System.out.println("Error al listar: " + e.getMessage());
+            throw new RuntimeException("Error al listar desde la base de datos: " + e.getMessage(), e);
         }
 
         return lista;
@@ -84,7 +88,7 @@ public abstract class PersonaDAO<T extends Persona>
             }
 
         } catch (SQLException e) {
-            System.out.println("Error al buscar: " + e.getMessage());
+            throw new RuntimeException("Error al buscar en la base de datos.", e);
         }
 
         return Optional.empty();
@@ -101,10 +105,14 @@ public abstract class PersonaDAO<T extends Persona>
             sentencia.setString(2, persona.getApellido());
             sentencia.setString(3, persona.getNombre());
             sentencia.setInt(4, persona.getCodigo());
-            sentencia.executeUpdate();
-
+            int filasActualizadas = sentencia.executeUpdate();
+            if (filasActualizadas == 0) {
+                throw new EntidadNoEncontradaException("No se encontró el registro a actualizar.");
+            }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new EntidadDuplicadaException("Ya existe una persona con ese DNI.");
         } catch (SQLException e) {
-            System.out.println("Error al actualizar: " + e.getMessage());
+            throw new RuntimeException("Error al actualizar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -115,10 +123,14 @@ public abstract class PersonaDAO<T extends Persona>
 
         try (PreparedStatement sentencia = conexion.prepareStatement(consulta)) {
             sentencia.setInt(1, codigo);
-            sentencia.executeUpdate();
-
+            int filasEliminadas = sentencia.executeUpdate();
+            if (filasEliminadas == 0) {
+                throw new EntidadNoEncontradaException("No se encontró el registro a eliminar.");
+            }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new RuntimeException("No se puede eliminar porque el registro tiene datos relacionados.", e);
         } catch (SQLException e) {
-            System.out.println("Error al eliminar: " + e.getMessage());
+            throw new RuntimeException("Error al eliminar en la base de datos: " + e.getMessage(), e);
         }
     }
 }

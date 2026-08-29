@@ -2,16 +2,16 @@ package gestion.militar.Controladores;
 
 import java.util.List;
 
-import gestion.militar.DAOS.SoldadoDAO;
+import gestion.militar.DAOS.GenericoDAO;
+import gestion.militar.Enums.CamposPersonaEnum;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Modelos.Soldado;
-import gestion.militar.Vistas.CamposPersonaEnum;
 
 public class SoldadosControlador {
 
-    private final SoldadoDAO soldadoDAO;
+    private final GenericoDAO<Soldado, Integer> soldadoDAO;
 
-    public SoldadosControlador(SoldadoDAO soldadoDAO) {
+    public SoldadosControlador(GenericoDAO<Soldado, Integer> soldadoDAO) {
         this.soldadoDAO = soldadoDAO;
     }
 

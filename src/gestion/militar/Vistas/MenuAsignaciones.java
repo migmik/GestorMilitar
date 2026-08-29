@@ -1,11 +1,20 @@
 package gestion.militar.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class MenuAsignaciones extends MenuBase {
+import gestion.militar.Controladores.AsignacionesControlador;
+import gestion.militar.Excepciones.EntidadDuplicadaException;
+import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Modelos.Asignacion;
 
-    public MenuAsignaciones(Scanner scanner) {
+public class MenuAsignaciones extends MenuBase {
+    AsignacionesControlador asignacionesControlador;
+
+    public MenuAsignaciones(Scanner scanner, AsignacionesControlador asignacionesControlador) {
         super(scanner);
+        this.asignacionesControlador = asignacionesControlador;
     }
 
     @Override
@@ -15,7 +24,7 @@ public class MenuAsignaciones extends MenuBase {
             System.out.println("\n--- Gestión de Asignaciones ---");
             System.out.println("1. Ingresar asignación");
             System.out.println("2. Modificar asignación");
-            System.out.println("3. Consultar asignación por código");
+            System.out.println("3. Consultar asignación por código de oficial");
             System.out.println("4. Listar todas las asignaciones");
             System.out.println("5. Eliminar asignación");
             System.out.println("0. Volver");
@@ -50,50 +59,68 @@ public class MenuAsignaciones extends MenuBase {
         int codigoCuartel = leerEntero("Ingrese codigo del cuartel: ");
 
         try {
-            // llamada al servicio
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            asignacionesControlador.ingresar(codigoOficial, codigoCuartel);
+            System.out.println("Asignación realizada con exito.");
+        } catch (EntidadNoEncontradaException | EntidadDuplicadaException e) {
+            System.out.println("No se pudo asignar: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void modificar() {
         listar();
-        int codigo = leerEntero("Ingrese codigo de asignacion a modificar: ");
-        int codigoOficial = leerEntero("Ingrese nuevo codigo de oficial: ");
-        int codigoCuartel = leerEntero("Ingrese nuevo codigo de cuartel: ");
+        int codigoOficial = leerEntero("Ingrese codigo del oficial para modificar su asignación: ");
+        int codigoCuartel = leerEntero("Ingrese codigo del nuevo cuartel: ");
 
         try {
-            // llamada al servicio
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            asignacionesControlador.modificar(codigoOficial, codigoCuartel);
+            System.out.println("Asignación modificada con exito.");
+        } catch (EntidadNoEncontradaException | EntidadDuplicadaException e) {
+            System.out.println("No se pudo modificar: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void consultar() {
-        int codigo = leerEntero("Ingrese codigo de asignacion: ");
+        int codigo = leerEntero("Ingrese codigo del oficial para consultar la asignación: ");
 
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            Asignacion asignacion = asignacionesControlador.consultarPorCodigoOficial(codigo);
+            System.out.println("Asignación encontrada:\n " + asignacion.toString());
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void listar() {
+        List<Asignacion> asignaciones = new ArrayList<>();
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            asignaciones = asignacionesControlador.listarTodos();
+            System.out.println("Lista de asignaciones:\n");
+            asignaciones.forEach(System.out::println);
+            if (asignaciones.isEmpty())
+                System.out.println("No hay asignaciones registradas.");
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 
     private void eliminar() {
-        int codigo = leerEntero("Ingrese codigo de asignacion a eliminar: ");
+        int codigo = leerEntero("Ingrese codigo del oficial para eliminar la asignación: ");
 
         try {
-            // llamada al servicio
-        } catch (Exception e) {
+            asignacionesControlador.eliminar(codigo);
+            System.out.println("Asignación eliminada con exito.");
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error técnico: " + e.getMessage());
         }
     }
 }

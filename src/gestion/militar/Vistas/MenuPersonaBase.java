@@ -2,6 +2,8 @@ package gestion.militar.Vistas;
 
 import java.util.Scanner;
 
+import gestion.militar.Enums.CamposPersonaEnum;
+
 public abstract class MenuPersonaBase extends MenuBase {
 
     public MenuPersonaBase(Scanner scanner) {

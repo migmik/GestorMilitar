@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import gestion.militar.Excepciones.EntidadDuplicadaException;
+import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Modelos.Cuartel;
 
 public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
@@ -30,13 +33,13 @@ public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
             try (ResultSet keyGeneradas = sentencia.getGeneratedKeys()) {
                 if (keyGeneradas.next()) {
                     cuartel.setCodigo(keyGeneradas.getInt(1));
-                } else {
-                    throw new SQLException("No se pudo obtener el código del cuartel creado");
                 }
             }
 
-        } catch (Exception e) {
-            System.out.println("Error al guardar el cuartel en MySQL: " + e.getMessage());
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new EntidadDuplicadaException("Ya existe un cuartel con ese nombre.");
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al guardar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -57,8 +60,8 @@ public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
                 lista.add(cuartel);
             }
 
-        } catch (Exception e) {
-            System.out.println("Error al listar los cuarteles en MySQL: " + e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al listar desde la base de datos: " + e.getMessage(), e);
         }
 
         return lista;
@@ -82,8 +85,8 @@ public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
                 }
             }
 
-        } catch (Exception e) {
-            System.out.println("Error al buscar el cuartel en MySQL: " + e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al buscar en la base de datos.", e);
         }
 
         return Optional.empty();
@@ -101,11 +104,13 @@ public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
             int filas = sentencia.executeUpdate();
 
             if (filas == 0) {
-                throw new Exception("No se encontró el cuartel a modificar en MySQL");
+                throw new EntidadNoEncontradaException("No se encontró el registro a actualizar.");
             }
 
-        } catch (Exception e) {
-            System.out.println("Error al modificar el cuartel en MySQL: " + e.getMessage());
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new EntidadDuplicadaException("Ya existe un cuartel con ese nombre.");
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -115,10 +120,14 @@ public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
 
         try (PreparedStatement sentencia = conexion.prepareStatement(consulta)) {
             sentencia.setInt(1, codigo);
-            sentencia.executeUpdate();
-
-        } catch (Exception e) {
-            System.out.println("Error al eliminar el cuartel en MySQL: " + e.getMessage());
+            int filasEliminadas = sentencia.executeUpdate();
+            if (filasEliminadas == 0) {
+                throw new EntidadNoEncontradaException("No se encontró el registro a eliminar.");
+            }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new RuntimeException("No se puede eliminar porque el registro tiene datos relacionados.", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al eliminar en la base de datos: " + e.getMessage(), e);
         }
     }
 

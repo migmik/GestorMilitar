@@ -3,7 +3,7 @@ package gestion.militar.DAOS;
 import java.util.List;
 import java.util.Optional;
 
-interface GenericoDAO<T, ID> {
+public interface GenericoDAO<T, ID> {
     void crear(T entidad);
 
     List<T> encontrarTodos();

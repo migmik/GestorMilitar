@@ -5,5 +5,9 @@
 .vscode/
 
 # Configuración personal o credenciales locales
+/config/db.properties
 *.log
 *.class
+*.mwb
+*.bak
+.env

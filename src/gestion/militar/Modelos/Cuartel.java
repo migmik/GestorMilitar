@@ -5,16 +5,15 @@ public class Cuartel {
     private String nombre;
     private int capacidad;
 
-
     public Cuartel(int codigo, String nombre, int capacidad) {
         this.codigo = codigo;
-        this.nombre = nombre;
-        this.capacidad = capacidad;
+        setNombre(nombre);
+        setCapacidad(capacidad);
     }
 
     public Cuartel(String nombre, int capacidad) {
-        this.nombre = nombre;
-        this.capacidad = capacidad;
+        setNombre(nombre);
+        setCapacidad(capacidad);
     }
 
     public String getNombre() {
@@ -22,6 +21,9 @@ public class Cuartel {
     }
 
     public void setNombre(String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("El nombre es obligatorio.");
+        }
         this.nombre = nombre;
     }
 
@@ -38,6 +40,9 @@ public class Cuartel {
     }
 
     public void setCapacidad(int capacidad) {
+        if (capacidad <= 0) {
+            throw new IllegalArgumentException("La capacidad debe ser mayor a 0.");
+        }
         this.capacidad = capacidad;
     }
 
