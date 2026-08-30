@@ -17,6 +17,6 @@ public class Oficial extends Persona {
 
     @Override
     public String mostrarInfo() {
-        return Oficial.class.getSimpleName() + super.toString();
+        return "Oficial | " + super.toString();
     }
 }

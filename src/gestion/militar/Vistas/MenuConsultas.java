@@ -31,7 +31,7 @@ public class MenuConsultas extends MenuBase {
             System.out.println("2. Consultar soldados supervisados por un oficial");
             System.out.println("3. Consultar oficial asignado a un soldado");
             System.out.println("0. Volver");
-            switch (super.leerOpcion("Ingrese opción: ")) {
+            switch (super.leerOpcion("Ingrese opcion: ")) {
                 case 1:
                     soldadoConCuartel();
                     break;
@@ -60,7 +60,7 @@ public class MenuConsultas extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -80,7 +80,7 @@ public class MenuConsultas extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -96,7 +96,7 @@ public class MenuConsultas extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 }

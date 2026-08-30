@@ -26,7 +26,7 @@ public class AsignacionesControlador {
         Oficial oficial = oficialesControlador.consultarPorCodigo(codigoOficial);
         Cuartel cuartel = cuartelesControlador.consultarPorCodigo(codigoCuartel);
         if (oficialTieneUnaAsignacionActiva(codigoOficial)) {
-            throw new EntidadDuplicadaException("El oficial ya posee una asignación.");
+            throw new EntidadDuplicadaException("El oficial ya posee una asignacion.");
         }
         if (cuartelTieneOficialAsignado(cuartel)) {
             throw new EntidadDuplicadaException("El cuartel ya tiene un oficial asignado.");
@@ -40,9 +40,9 @@ public class AsignacionesControlador {
         Cuartel nuevoCuartel = cuartelesControlador.consultarPorCodigo(codigoNuevoCuartel);
         Asignacion asignacionActual = asignacionRepositorio.encontrarPorID(codigoOficial).orElseThrow(
                 () -> new EntidadNoEncontradaException(
-                        "No se encontró ninguna asignación asociada al codigo " + codigoOficial));
+                        "No se encontro ninguna asignacion asociada al codigo " + codigoOficial));
         if (asignacionActual.getCuartel().getCodigo() == codigoNuevoCuartel) {
-            throw new EntidadDuplicadaException("El oficial ya posee una asignación en ese cuartel.");
+            throw new EntidadDuplicadaException("El oficial ya posee una asignacion en ese cuartel.");
         }
         if (cuartelTieneOficialAsignado(nuevoCuartel)) {
             throw new EntidadDuplicadaException("El cuartel ya tiene un oficial asignado.");
@@ -53,7 +53,7 @@ public class AsignacionesControlador {
 
     public Asignacion consultarPorCodigoOficial(int codigoOficial) {
         return asignacionRepositorio.encontrarPorID(codigoOficial).orElseThrow(
-                () -> new EntidadNoEncontradaException("No se encontró ninguna asignación para el " +
+                () -> new EntidadNoEncontradaException("No se encontro ninguna asignacion para el " +
                         codigoOficial));
     }
 

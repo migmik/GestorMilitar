@@ -48,7 +48,9 @@ public class Cuartel {
 
     @Override
     public String toString() {
-        return "Cuartel [nombre=" + nombre + ", codigo=" + codigo + ", capacidad=" + capacidad + "]";
+        return "Cuartel | Codigo: " + codigo
+                + " | Nombre: " + nombre
+                + " | Capacidad: " + capacidad;
     }
 
 }

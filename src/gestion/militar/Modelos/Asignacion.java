@@ -27,7 +27,10 @@ public class Asignacion {
 
     @Override
     public String toString() {
-        return "Asignacion [oficial=" + oficial + ", cuartel=" + cuartel + "]";
+        return "Asignacion | Oficial: " + oficial.getApellido() + ", " + oficial.getNombre()
+                + " (Codigo: " + oficial.getCodigo() + ", DNI: " + oficial.getDni() + ")"
+                + " | Cuartel: " + cuartel.getNombre()
+                + " (Codigo: " + cuartel.getCodigo() + ", Capacidad: " + cuartel.getCapacidad() + ")";
     }
 
 }

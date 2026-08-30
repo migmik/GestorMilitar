@@ -22,10 +22,10 @@ public abstract class MenuBase {
                 if (valor > 0) {
                     esValido = true;
                 } else {
-                    System.out.println("Número invalido.");
+                    System.out.println("Numero invalido.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Ingrese un número.");
+                System.out.println("Entrada invalida. Ingrese un numero.");
             }
         }
         return valor;
@@ -35,7 +35,7 @@ public abstract class MenuBase {
         System.out.print(mensaje);
         String entrada = scanner.nextLine().trim();
         while (entrada.isEmpty()) {
-            System.out.print("El campo no puede estar vacío. Intente de nuevo: ");
+            System.out.print("El campo no puede estar vacio. Intente de nuevo: ");
             entrada = scanner.nextLine().trim();
         }
         return entrada;
@@ -51,7 +51,7 @@ public abstract class MenuBase {
                 opcion = Integer.parseInt(scanner.nextLine().trim());
                 valida = true;
             } catch (NumberFormatException e) {
-                System.out.println("Opción inválida. Ingrese solo números.");
+                System.out.println("Opcion invalida. Ingrese solo numeros.");
             }
         }
         return opcion;

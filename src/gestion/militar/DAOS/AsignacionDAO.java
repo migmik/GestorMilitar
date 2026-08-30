@@ -32,7 +32,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
             sentencia.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new EntidadDuplicadaException(
-                    "El oficial ya posee una asignación activa o el cuartel ya tiene un oficial asignado.");
+                    "El oficial ya posee una asignacion activa o el cuartel ya tiene un oficial asignado.");
         } catch (SQLException e) {
             throw new RuntimeException("Error al guardar en la base de datos: " + e.getMessage(), e);
         }
@@ -65,7 +65,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error técnico en la base de datos: " + e.getMessage(), e);
+            throw new RuntimeException("Error tecnico en la base de datos: " + e.getMessage(), e);
         }
         return Optional.empty();
     }
@@ -108,12 +108,12 @@ public class AsignacionDAO implements AsignacionRepositorio {
             sentencia.setInt(2, entidad.getOficial().getCodigo());
             int filasModificadas = sentencia.executeUpdate();
             if (filasModificadas == 0) {
-                throw new EntidadNoEncontradaException("No se encontró la asignación a actualizar.");
+                throw new EntidadNoEncontradaException("No se encontro la asignacion a actualizar.");
             }
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new EntidadDuplicadaException("El cuartel ya tiene un oficial asignado.");
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar la asignación en la base de datos: " + e.getMessage(), e);
+            throw new RuntimeException("Error al actualizar la asignacion en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -124,10 +124,10 @@ public class AsignacionDAO implements AsignacionRepositorio {
             sentencia.setInt(1, codigo);
             int filasEliminadas = sentencia.executeUpdate();
             if (filasEliminadas == 0) {
-                throw new EntidadNoEncontradaException("No se encontró la asignación a eliminar.");
+                throw new EntidadNoEncontradaException("No se encontro la asignacion a eliminar.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al eliminar la asignación de la base de datos: " + e.getMessage(), e);
+            throw new RuntimeException("Error al eliminar la asignacion de la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -176,10 +176,10 @@ public class AsignacionDAO implements AsignacionRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al consultar la asignación por cuartel: " + e.getMessage(), e);
+            throw new RuntimeException("Error al consultar la asignacion por cuartel: " + e.getMessage(), e);
         }
 
-        throw new EntidadNoEncontradaException("No se encontró ninguna asignación para el cuartel " + codigoCuartel);
+        throw new EntidadNoEncontradaException("No se encontro ninguna asignacion para el cuartel " + codigoCuartel);
     }
 
     public String getTabla() {

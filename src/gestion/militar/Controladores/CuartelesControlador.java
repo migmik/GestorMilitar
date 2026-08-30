@@ -43,7 +43,7 @@ public class CuartelesControlador {
 
     public Cuartel consultarPorCodigo(int codigo) {
         return cuartelDAO.encontrarPorID(codigo).orElseThrow(
-                () -> new EntidadNoEncontradaException("No se encontró ningún cuartel con el código " + codigo));
+                () -> new EntidadNoEncontradaException("No se encontro ningun cuartel con el codigo " + codigo));
     }
 
     public List<Cuartel> listarTodos() {

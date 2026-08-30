@@ -104,7 +104,7 @@ public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
             int filas = sentencia.executeUpdate();
 
             if (filas == 0) {
-                throw new EntidadNoEncontradaException("No se encontró el registro a actualizar.");
+                throw new EntidadNoEncontradaException("No se encontro el registro a actualizar.");
             }
 
         } catch (SQLIntegrityConstraintViolationException e) {
@@ -122,7 +122,7 @@ public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
             sentencia.setInt(1, codigo);
             int filasEliminadas = sentencia.executeUpdate();
             if (filasEliminadas == 0) {
-                throw new EntidadNoEncontradaException("No se encontró el registro a eliminar.");
+                throw new EntidadNoEncontradaException("No se encontro el registro a eliminar.");
             }
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new RuntimeException("No se puede eliminar porque el registro tiene datos relacionados.", e);

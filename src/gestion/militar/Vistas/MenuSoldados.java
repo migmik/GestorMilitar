@@ -22,14 +22,14 @@ public class MenuSoldados extends MenuPersonaBase {
     public void mostrar() {
         boolean salir = false;
         while (!salir) {
-            System.out.println("\n--- Gestión de Soldados ---");
+            System.out.println("\n--- Gestion de Soldados ---");
             System.out.println("1. Ingresar soldado");
             System.out.println("2. Modificar soldado");
-            System.out.println("3. Consultar soldado por código");
+            System.out.println("3. Consultar soldado por codigo");
             System.out.println("4. Listar todos los soldados");
             System.out.println("5. Eliminar soldado");
             System.out.println("0. Volver");
-            switch (leerOpcion("Ingrese Opción: ")) {
+            switch (leerOpcion("Ingrese opcion: ")) {
                 case 1:
                     ingresar();
                     break;
@@ -65,7 +65,7 @@ public class MenuSoldados extends MenuPersonaBase {
         } catch (EntidadDuplicadaException | IllegalArgumentException e) {
             System.out.println("No se pudo registrar: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ public class MenuSoldados extends MenuPersonaBase {
             gestionarEdicionPersona(codigo);
 
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -91,7 +91,7 @@ public class MenuSoldados extends MenuPersonaBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -99,12 +99,12 @@ public class MenuSoldados extends MenuPersonaBase {
         List<Soldado> soldados = new ArrayList<>();
         try {
             soldados = soldadosControlador.listarTodos();
-            System.out.println("Lista de soldado:\n");
+            System.out.println("Lista de soldados:\n");
             soldados.forEach(System.out::println);
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -116,12 +116,12 @@ public class MenuSoldados extends MenuPersonaBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
     @Override
-    protected void ejecutarActualización(int codigo, CamposPersonaEnum campo, String nuevoValor) {
+    protected void ejecutarActualizacion(int codigo, CamposPersonaEnum campo, String nuevoValor) {
         soldadosControlador.modificar(codigo, campo, nuevoValor);
     }
 }

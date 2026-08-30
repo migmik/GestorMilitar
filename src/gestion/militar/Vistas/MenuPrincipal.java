@@ -27,7 +27,7 @@ public class MenuPrincipal extends MenuBase {
         boolean salir = false;
         System.out.println("=== Gestion Militar ===");
         while (!salir) {
-            System.out.println("\n--- Menú Principal ---");
+            System.out.println("\n--- Menu Principal ---");
             System.out.println("1. Gestionar Soldados");
             System.out.println("2. Gestionar Oficiales");
             System.out.println("3. Gestionar Cuarteles");
@@ -35,7 +35,7 @@ public class MenuPrincipal extends MenuBase {
             System.out.println("5. Reservas");
             System.out.println("6. Consultas");
             System.out.println("0. Salir");
-            switch (leerOpcion("Ingrese opción: ")) {
+            switch (leerOpcion("Ingrese opcion: ")) {
                 case 1:
                     menuSoldados.mostrar();
                     break;
@@ -59,7 +59,7 @@ public class MenuPrincipal extends MenuBase {
                     System.out.println("Saliendo del sistema...");
                     break;
                 default:
-                    System.out.println("Opcion inválida.");
+                    System.out.println("Opcion invalida.");
                     break;
             }
         }

@@ -38,7 +38,7 @@ public class OficialesControlador {
 
     public Oficial consultarPorCodigo(int codigo) {
         return oficialDAO.encontrarPorID(codigo).orElseThrow(
-                () -> new EntidadNoEncontradaException("No se encontró ningún oficial con el código " + codigo));
+                () -> new EntidadNoEncontradaException("No se encontro ningun oficial con el codigo " + codigo));
     }
 
     public List<Oficial> listarTodos() {

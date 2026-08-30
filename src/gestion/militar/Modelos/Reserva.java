@@ -27,7 +27,10 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva [soldado=" + soldado + ", cuartel=" + cuartel + "]";
+        return "Reserva | Soldado: " + soldado.getApellido() + ", " + soldado.getNombre()
+                + " (Codigo: " + soldado.getCodigo() + ", DNI: " + soldado.getDni() + ")"
+                + " | Cuartel: " + cuartel.getNombre()
+                + " (Codigo: " + cuartel.getCodigo() + ", Capacidad: " + cuartel.getCapacidad() + ")";
     }
 
 }

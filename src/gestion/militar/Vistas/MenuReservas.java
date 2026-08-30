@@ -22,14 +22,14 @@ public class MenuReservas extends MenuBase {
     public void mostrar() {
         boolean salir = false;
         while (!salir) {
-            System.out.println("\n--- Gestión de Reservas ---");
+            System.out.println("\n--- Gestion de Reservas ---");
             System.out.println("1. Ingresar reserva");
             System.out.println("2. Modificar reserva");
-            System.out.println("3. Consultar reserva por código de soldado");
+            System.out.println("3. Consultar reserva por codigo de soldado");
             System.out.println("4. Listar todas las reservas");
             System.out.println("5. Eliminar reserva");
             System.out.println("0. Volver");
-            switch (leerOpcion("Ingrese opción: ")) {
+            switch (leerOpcion("Ingrese opcion: ")) {
                 case 1:
                     ingresar();
                     break;
@@ -64,21 +64,21 @@ public class MenuReservas extends MenuBase {
         } catch (EntidadNoEncontradaException | CapacidadExcedidaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo reservar: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
     private void modificar() {
         listar();
         int codigo = leerEntero("Ingrese codigo del soldado para modificar su reserva: ");
-        int codigoCuartel = leerEntero("Ingrese  codigo del nuevo cuartel: ");
+        int codigoCuartel = leerEntero("Ingrese codigo del nuevo cuartel: ");
         try {
             reservasControlador.modificar(codigo, codigoCuartel);
             System.out.println("Reserva modificada con exito.");
         } catch (EntidadNoEncontradaException | CapacidadExcedidaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo modificar: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ public class MenuReservas extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ public class MenuReservas extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -117,7 +117,7 @@ public class MenuReservas extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 }

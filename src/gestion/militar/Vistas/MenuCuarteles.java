@@ -23,14 +23,14 @@ public class MenuCuarteles extends MenuBase {
     public void mostrar() {
         boolean salir = false;
         while (!salir) {
-            System.out.println("\n--- Gestión de Cuarteles ---");
+            System.out.println("\n--- Gestion de Cuarteles ---");
             System.out.println("1. Ingresar cuartel");
             System.out.println("2. Modificar datos de cuartel");
-            System.out.println("3. Consultar cuartel por código");
+            System.out.println("3. Consultar cuartel por codigo");
             System.out.println("4. Listar todos los cuarteles");
             System.out.println("5. Eliminar cuartel");
             System.out.println("0. Volver");
-            switch (leerOpcion("Ingrese Opción: ")) {
+            switch (leerOpcion("Ingrese opcion: ")) {
                 case 1:
                     ingresar();
                     break;
@@ -65,7 +65,7 @@ public class MenuCuarteles extends MenuBase {
         } catch (EntidadDuplicadaException | IllegalArgumentException e) {
             System.out.println("No se pudo registrar: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -77,13 +77,13 @@ public class MenuCuarteles extends MenuBase {
             System.out.println("Modificacion del cuartel: " + cuartelExistente.toString());
             boolean salir = false;
             while (!salir) {
-                System.out.println("\n¿Qué dato desea modificar?");
+                System.out.println("\nQue dato desea modificar?");
                 CamposCuartelEnum[] campos = CamposCuartelEnum.values();
                 for (int i = 0; i < campos.length; i++) {
                     System.out.println((i + 1) + ". " + campos[i].getDescripcion());
                 }
-                System.out.println("0. Volver al menú anterior");
-                int opcion = leerOpcion("Seleccione una opción: ");
+                System.out.println("0. Volver al menu anterior");
+                int opcion = leerOpcion("Seleccione una opcion: ");
 
                 if (opcion == 0) {
                     salir = true;
@@ -93,12 +93,12 @@ public class MenuCuarteles extends MenuBase {
                             "Ingrese el nuevo valor para " + campoSeleccionado.getDescripcion() + ": ");
                     try {
                         cuartelesControlador.modificar(codigo, campoSeleccionado, nuevoValor);
-                        System.out.println("Campo actualizado con éxito.");
+                        System.out.println("Campo actualizado con exito.");
                     } catch (RuntimeException e) {
                         System.out.println("No se pudo actualizar: " + e.getMessage());
                     }
                 } else {
-                    System.out.println("Opcion inválida");
+                    System.out.println("Opcion invalida");
                 }
             }
 
@@ -116,7 +116,7 @@ public class MenuCuarteles extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ public class MenuCuarteles extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -141,7 +141,7 @@ public class MenuCuarteles extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 }

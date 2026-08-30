@@ -34,10 +34,10 @@ public abstract class Persona {
 
     public void setDni(String dni) {
         if (dni == null || dni.isBlank()) {
-            throw new IllegalArgumentException("El DNI no puede estar vacío.");
+            throw new IllegalArgumentException("El DNI no puede estar vacio.");
         }
         if (!dni.matches("[0-9]{7,8}")) {
-            throw new IllegalArgumentException("El DNI debe contener entre 7 y 8 dígitos numéricos.");
+            throw new IllegalArgumentException("El DNI debe contener entre 7 y 8 digitos numericos.");
         }
         this.dni = dni;
     }
@@ -66,7 +66,10 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return " [codigo=" + codigo + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + "]";
+        return "Codigo: " + codigo
+                + " | DNI: " + dni
+                + " | Apellido: " + apellido
+                + " | Nombre: " + nombre;
     }
 
     public abstract String mostrarInfo();

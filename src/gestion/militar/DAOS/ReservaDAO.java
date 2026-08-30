@@ -60,7 +60,7 @@ public class ReservaDAO implements ReservaRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error técnico en la base de datos:" + e.getMessage(), e);
+            throw new RuntimeException("Error tecnico en la base de datos: " + e.getMessage(), e);
         }
         return Optional.empty();
     }
@@ -100,7 +100,7 @@ public class ReservaDAO implements ReservaRepositorio {
             sentencia.setInt(2, entidad.getSoldado().getCodigo());
             int filasModificadas = sentencia.executeUpdate();
             if (filasModificadas == 0) {
-                throw new EntidadNoEncontradaException("No se encontró la reserva a actualizar.");
+                throw new EntidadNoEncontradaException("No se encontro la reserva a actualizar.");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al actualizar la reserva en la base de datos: " + e.getMessage(), e);
@@ -114,7 +114,7 @@ public class ReservaDAO implements ReservaRepositorio {
             sentencia.setInt(1, codigo);
             int filasEliminadas = sentencia.executeUpdate();
             if (filasEliminadas == 0) {
-                throw new EntidadNoEncontradaException("No se encontró la reserva a eliminar.");
+                throw new EntidadNoEncontradaException("No se encontro la reserva a eliminar.");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al eliminar la reserva de la base de datos: " + e.getMessage(), e);

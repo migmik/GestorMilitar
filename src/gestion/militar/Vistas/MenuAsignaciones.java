@@ -21,14 +21,14 @@ public class MenuAsignaciones extends MenuBase {
     public void mostrar() {
         boolean salir = false;
         while (!salir) {
-            System.out.println("\n--- Gestión de Asignaciones ---");
-            System.out.println("1. Ingresar asignación");
-            System.out.println("2. Modificar asignación");
-            System.out.println("3. Consultar asignación por código de oficial");
+            System.out.println("\n--- Gestion de Asignaciones ---");
+            System.out.println("1. Ingresar asignacion");
+            System.out.println("2. Modificar asignacion");
+            System.out.println("3. Consultar asignacion por codigo de oficial");
             System.out.println("4. Listar todas las asignaciones");
-            System.out.println("5. Eliminar asignación");
+            System.out.println("5. Eliminar asignacion");
             System.out.println("0. Volver");
-            switch (leerOpcion("Ingrese opción: ")) {
+            switch (leerOpcion("Ingrese opcion: ")) {
                 case 1:
                     ingresar();
                     break;
@@ -60,39 +60,39 @@ public class MenuAsignaciones extends MenuBase {
 
         try {
             asignacionesControlador.ingresar(codigoOficial, codigoCuartel);
-            System.out.println("Asignación realizada con exito.");
+            System.out.println("Asignacion realizada con exito.");
         } catch (EntidadNoEncontradaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo asignar: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
     private void modificar() {
         listar();
-        int codigoOficial = leerEntero("Ingrese codigo del oficial para modificar su asignación: ");
+        int codigoOficial = leerEntero("Ingrese codigo del oficial para modificar su asignacion: ");
         int codigoCuartel = leerEntero("Ingrese codigo del nuevo cuartel: ");
 
         try {
             asignacionesControlador.modificar(codigoOficial, codigoCuartel);
-            System.out.println("Asignación modificada con exito.");
+            System.out.println("Asignacion modificada con exito.");
         } catch (EntidadNoEncontradaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo modificar: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
     private void consultar() {
-        int codigo = leerEntero("Ingrese codigo del oficial para consultar la asignación: ");
+        int codigo = leerEntero("Ingrese codigo del oficial para consultar la asignacion: ");
 
         try {
             Asignacion asignacion = asignacionesControlador.consultarPorCodigoOficial(codigo);
-            System.out.println("Asignación encontrada:\n " + asignacion.toString());
+            System.out.println("Asignacion encontrada:\n " + asignacion.toString());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
@@ -107,20 +107,20 @@ public class MenuAsignaciones extends MenuBase {
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 
     private void eliminar() {
-        int codigo = leerEntero("Ingrese codigo del oficial para eliminar la asignación: ");
+        int codigo = leerEntero("Ingrese codigo del oficial para eliminar la asignacion: ");
 
         try {
             asignacionesControlador.eliminar(codigo);
-            System.out.println("Asignación eliminada con exito.");
+            System.out.println("Asignacion eliminada con exito.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (RuntimeException e) {
-            System.out.println("Error técnico: " + e.getMessage());
+            System.out.println("Error tecnico: " + e.getMessage());
         }
     }
 }

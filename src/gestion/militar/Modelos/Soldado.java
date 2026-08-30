@@ -17,7 +17,7 @@ public class Soldado extends Persona {
 
     @Override
     public String mostrarInfo() {
-        return Soldado.class.getSimpleName() + super.toString();
+        return "Soldado | " + super.toString();
 
     }
 

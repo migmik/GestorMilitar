@@ -10,20 +10,20 @@ public abstract class MenuPersonaBase extends MenuBase {
         super(scanner);
     }
 
-    protected abstract void ejecutarActualización(int codigo, CamposPersonaEnum campo, String nuevoValor);
+    protected abstract void ejecutarActualizacion(int codigo, CamposPersonaEnum campo, String nuevoValor);
 
-    // Metodo que reutilizan los menús de personas
+    // Metodo que reutilizan los menus de personas
     protected void gestionarEdicionPersona(int codigo) {
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("\n¿Qué dato desea modificar?");
+            System.out.println("\nQue dato desea modificar?");
             CamposPersonaEnum[] campos = CamposPersonaEnum.values();
             for (int i = 0; i < campos.length; i++) {
                 System.out.println((i + 1) + ". " + campos[i].getDescripcion());
             }
-            System.out.println("0. Volver al menú anterior");
-            int opcion = leerOpcion("Seleccione una opción: ");
+            System.out.println("0. Volver al menu anterior");
+            int opcion = leerOpcion("Seleccione una opcion: ");
 
             if (opcion == 0) {
                 salir = true;
@@ -33,13 +33,13 @@ public abstract class MenuPersonaBase extends MenuBase {
                         "Ingrese el nuevo valor para " + campoSeleccionado.getDescripcion() + ": ");
                 try {
                     // orden al controlador a por método abstracto
-                    ejecutarActualización(codigo, campoSeleccionado, nuevoValor);
-                    System.out.println("Campo actualizado con éxito.");
+                    ejecutarActualizacion(codigo, campoSeleccionado, nuevoValor);
+                    System.out.println("Campo actualizado con exito.");
                 } catch (RuntimeException e) {
                     System.out.println("No se pudo actualizar: " + e.getMessage());
                 }
             } else {
-                System.out.println("Opcion inválida");
+                System.out.println("Opcion invalida");
             }
         }
     }

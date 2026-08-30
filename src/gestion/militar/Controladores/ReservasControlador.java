@@ -39,7 +39,7 @@ public class ReservasControlador {
         Cuartel nuevoCuartel = cuartelesControlador.consultarPorCodigo(codigoNuevoCuartel);
         Reserva reservaActual = reservaRepositorio.encontrarPorID(codigoSoldado).orElseThrow(
                 () -> new EntidadNoEncontradaException(
-                        "No se encontró ninguna reserva asociada al codigo " + codigoSoldado));
+                        "No se encontro ninguna reserva asociada al codigo " + codigoSoldado));
         if (reservaActual.getCuartel().getCodigo() == codigoNuevoCuartel) {
             throw new EntidadDuplicadaException("El soldado ya posee una reserva en ese cuartel.");
         }
@@ -52,7 +52,7 @@ public class ReservasControlador {
 
     public Reserva consultarPorCodigoSoldado(int codigoSoldado) {
         return reservaRepositorio.encontrarPorID(codigoSoldado).orElseThrow(
-                () -> new EntidadNoEncontradaException("No se encontró ninguna reserva para el " +
+                () -> new EntidadNoEncontradaException("No se encontro ninguna reserva para el " +
                         codigoSoldado));
 
     }

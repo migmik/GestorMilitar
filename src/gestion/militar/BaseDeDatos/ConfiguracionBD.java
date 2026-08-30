@@ -19,7 +19,7 @@ public class ConfiguracionBD {
             String password = propiedades.getProperty("db.password");
             return DriverManager.getConnection(url, user, password);
         } catch (IOException e) {
-            throw new RuntimeException("No se pudo leer la configuración de la base de datos.", e);
+            throw new RuntimeException("No se pudo leer la configuracion de la base de datos.", e);
         } catch (SQLException e) {
             throw new RuntimeException("No se pudo conectar a la base de datos: " + e.getMessage(), e);
         }

@@ -38,7 +38,7 @@ public class SoldadosControlador {
 
     public Soldado consultarPorCodigo(int codigo) {
         return soldadoDAO.encontrarPorID(codigo).orElseThrow(
-                () -> new EntidadNoEncontradaException("No se encontró ningún soldado con el código " + codigo));
+                () -> new EntidadNoEncontradaException("No se encontro ningun soldado con el codigo " + codigo));
     }
 
     public List<Soldado> listarTodos() {
