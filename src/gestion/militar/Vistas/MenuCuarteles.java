@@ -8,6 +8,7 @@ import gestion.militar.Controladores.CuartelesControlador;
 import gestion.militar.Enums.CamposCuartelEnum;
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Cuartel;
 
 public class MenuCuarteles extends MenuBase {
@@ -64,6 +65,8 @@ public class MenuCuarteles extends MenuBase {
             System.out.println("Cuartel registrado con exito.");
         } catch (EntidadDuplicadaException | IllegalArgumentException e) {
             System.out.println("No se pudo registrar: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -94,6 +97,8 @@ public class MenuCuarteles extends MenuBase {
                     try {
                         cuartelesControlador.modificar(codigo, campoSeleccionado, nuevoValor);
                         System.out.println("Campo actualizado con exito.");
+                    } catch (PersistenciaException e) {
+                        System.out.println("Error de base de datos: " + e.getMessage());
                     } catch (RuntimeException e) {
                         System.out.println("No se pudo actualizar: " + e.getMessage());
                     }
@@ -102,8 +107,12 @@ public class MenuCuarteles extends MenuBase {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("Error tecnico: " + e.getMessage());
         }
 
     }
@@ -115,6 +124,8 @@ public class MenuCuarteles extends MenuBase {
             System.out.println("Cuartel encontrado: \n" + cuartel.toString());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -128,6 +139,8 @@ public class MenuCuarteles extends MenuBase {
             cuarteles.forEach(System.out::println);
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -140,6 +153,8 @@ public class MenuCuarteles extends MenuBase {
             System.out.println("Cuartel eliminado con exito.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import gestion.militar.Controladores.AsignacionesControlador;
 import gestion.militar.Controladores.ReservasControlador;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Asignacion;
 import gestion.militar.Modelos.Reserva;
 
@@ -59,6 +60,8 @@ public class MenuConsultas extends MenuBase {
             System.out.println("\n" + reserva.getCuartel().toString());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -79,6 +82,8 @@ public class MenuConsultas extends MenuBase {
             }
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -95,6 +100,8 @@ public class MenuConsultas extends MenuBase {
             System.out.println("\n" + asignacion.getOficial().mostrarInfo());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }

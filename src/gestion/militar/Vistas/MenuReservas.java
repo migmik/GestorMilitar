@@ -7,6 +7,7 @@ import gestion.militar.Controladores.ReservasControlador;
 import gestion.militar.Excepciones.CapacidadExcedidaException;
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Reserva;
 
 public class MenuReservas extends MenuBase {
@@ -63,6 +64,8 @@ public class MenuReservas extends MenuBase {
             System.out.println("Reserva realizada con exito.");
         } catch (EntidadNoEncontradaException | CapacidadExcedidaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo reservar: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -77,6 +80,8 @@ public class MenuReservas extends MenuBase {
             System.out.println("Reserva modificada con exito.");
         } catch (EntidadNoEncontradaException | CapacidadExcedidaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo modificar: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -89,6 +94,8 @@ public class MenuReservas extends MenuBase {
             System.out.println("Reserva encontrada:\n " + reserva.toString());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -104,6 +111,8 @@ public class MenuReservas extends MenuBase {
                 System.out.println("No hay reservas registradas.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -116,6 +125,8 @@ public class MenuReservas extends MenuBase {
             System.out.println("Reserva eliminada con exito.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }

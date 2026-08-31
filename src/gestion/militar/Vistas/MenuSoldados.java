@@ -8,6 +8,7 @@ import gestion.militar.Controladores.SoldadosControlador;
 import gestion.militar.Enums.CamposPersonaEnum;
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Soldado;
 
 public class MenuSoldados extends MenuPersonaBase {
@@ -64,6 +65,8 @@ public class MenuSoldados extends MenuPersonaBase {
             System.out.println("Soldado registrado con exito!");
         } catch (EntidadDuplicadaException | IllegalArgumentException e) {
             System.out.println("No se pudo registrar: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -77,6 +80,10 @@ public class MenuSoldados extends MenuPersonaBase {
             System.out.println("Modificacion del soldado: " + soldadoExistente.mostrarInfo());
             gestionarEdicionPersona(codigo);
 
+        } catch (EntidadNoEncontradaException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -90,6 +97,8 @@ public class MenuSoldados extends MenuPersonaBase {
             System.out.println("Soldado encontrado: \n" + soldado.mostrarInfo());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -103,6 +112,8 @@ public class MenuSoldados extends MenuPersonaBase {
             soldados.forEach(System.out::println);
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -115,6 +126,8 @@ public class MenuSoldados extends MenuPersonaBase {
             System.out.println("Soldado eliminado con exito.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }

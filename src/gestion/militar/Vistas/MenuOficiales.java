@@ -8,6 +8,7 @@ import gestion.militar.Controladores.OficialesControlador;
 import gestion.militar.Enums.CamposPersonaEnum;
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Oficial;
 
 public class MenuOficiales extends MenuPersonaBase {
@@ -65,6 +66,8 @@ public class MenuOficiales extends MenuPersonaBase {
             System.out.println("Oficial registrado con exito!");
         } catch (EntidadDuplicadaException | IllegalArgumentException e) {
             System.out.println("No se pudo registrar: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -78,6 +81,10 @@ public class MenuOficiales extends MenuPersonaBase {
             System.out.println("Modificacion del oficial: " + oficialExistente.mostrarInfo());
             gestionarEdicionPersona(codigo);
 
+        } catch (EntidadNoEncontradaException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -91,6 +98,8 @@ public class MenuOficiales extends MenuPersonaBase {
             System.out.println("Oficial encontrado: \n" + oficial.mostrarInfo());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -104,6 +113,8 @@ public class MenuOficiales extends MenuPersonaBase {
             oficiales.forEach(System.out::println);
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -116,6 +127,8 @@ public class MenuOficiales extends MenuPersonaBase {
             System.out.println("Oficial eliminado con exito.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }

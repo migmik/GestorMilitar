@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Persona;
 
 public abstract class PersonaDAO<T extends Persona>
@@ -50,7 +51,7 @@ public abstract class PersonaDAO<T extends Persona>
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new EntidadDuplicadaException("Ya existe una persona con ese DNI.");
         } catch (SQLException e) {
-            throw new RuntimeException("Error al guardar en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al guardar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -67,7 +68,7 @@ public abstract class PersonaDAO<T extends Persona>
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al listar desde la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al listar desde la base de datos: " + e.getMessage(), e);
         }
 
         return lista;
@@ -88,7 +89,7 @@ public abstract class PersonaDAO<T extends Persona>
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al buscar en la base de datos.", e);
+            throw new PersistenciaException("Error al buscar en la base de datos.", e);
         }
 
         return Optional.empty();
@@ -112,7 +113,7 @@ public abstract class PersonaDAO<T extends Persona>
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new EntidadDuplicadaException("Ya existe una persona con ese DNI.");
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al actualizar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -128,9 +129,9 @@ public abstract class PersonaDAO<T extends Persona>
                 throw new EntidadNoEncontradaException("No se encontro el registro a eliminar.");
             }
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new RuntimeException("No se puede eliminar porque el registro tiene datos relacionados.", e);
+            throw new PersistenciaException("No se puede eliminar porque el registro tiene datos relacionados.", e);
         } catch (SQLException e) {
-            throw new RuntimeException("Error al eliminar en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al eliminar en la base de datos: " + e.getMessage(), e);
         }
     }
 }

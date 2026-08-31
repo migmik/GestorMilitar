@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Asignacion;
 import gestion.militar.Modelos.Cuartel;
 import gestion.militar.Modelos.Oficial;
@@ -34,7 +35,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
             throw new EntidadDuplicadaException(
                     "El oficial ya posee una asignacion activa o el cuartel ya tiene un oficial asignado.");
         } catch (SQLException e) {
-            throw new RuntimeException("Error al guardar en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al guardar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -65,7 +66,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error tecnico en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error tecnico en la base de datos: " + e.getMessage(), e);
         }
         return Optional.empty();
     }
@@ -95,7 +96,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
                 lista.add(new Asignacion(oficial, cuartel));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al listar las asignaciones de la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al listar las asignaciones de la base de datos: " + e.getMessage(), e);
         }
         return lista;
     }
@@ -113,7 +114,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new EntidadDuplicadaException("El cuartel ya tiene un oficial asignado.");
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar la asignacion en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al actualizar la asignacion en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -127,7 +128,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
                 throw new EntidadNoEncontradaException("No se encontro la asignacion a eliminar.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al eliminar la asignacion de la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al eliminar la asignacion de la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -142,7 +143,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al contar asignaciones en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al contar asignaciones en la base de datos: " + e.getMessage(), e);
         }
         return cantidad;
     }
@@ -176,7 +177,7 @@ public class AsignacionDAO implements AsignacionRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al consultar la asignacion por cuartel: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al consultar la asignacion por cuartel: " + e.getMessage(), e);
         }
 
         throw new EntidadNoEncontradaException("No se encontro ninguna asignacion para el cuartel " + codigoCuartel);

@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import gestion.militar.Excepciones.PersistenciaException;
+
 public class ConfiguracionBD {
     private static final String CONF_PATH = "config/db.properties";
 
@@ -19,9 +21,9 @@ public class ConfiguracionBD {
             String password = propiedades.getProperty("db.password");
             return DriverManager.getConnection(url, user, password);
         } catch (IOException e) {
-            throw new RuntimeException("No se pudo leer la configuracion de la base de datos.", e);
+            throw new PersistenciaException("No se pudo leer la configuracion de la base de datos.", e);
         } catch (SQLException e) {
-            throw new RuntimeException("No se pudo conectar a la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("No se pudo conectar a la base de datos: " + e.getMessage(), e);
         }
     }
 }

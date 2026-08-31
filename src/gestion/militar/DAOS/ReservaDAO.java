@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Cuartel;
 import gestion.militar.Modelos.Reserva;
 import gestion.militar.Modelos.Soldado;
@@ -33,7 +34,7 @@ public class ReservaDAO implements ReservaRepositorio {
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new EntidadDuplicadaException("Ya existe una reserva con esos datos.");
         } catch (SQLException e) {
-            throw new RuntimeException("Error al guardar en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al guardar en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -60,7 +61,7 @@ public class ReservaDAO implements ReservaRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error tecnico en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error tecnico en la base de datos: " + e.getMessage(), e);
         }
         return Optional.empty();
     }
@@ -87,7 +88,7 @@ public class ReservaDAO implements ReservaRepositorio {
                 lista.add(new Reserva(soldado, cuartel));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al listar las reservas de la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al listar las reservas de la base de datos: " + e.getMessage(), e);
         }
         return lista;
     }
@@ -103,7 +104,7 @@ public class ReservaDAO implements ReservaRepositorio {
                 throw new EntidadNoEncontradaException("No se encontro la reserva a actualizar.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar la reserva en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al actualizar la reserva en la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -117,7 +118,7 @@ public class ReservaDAO implements ReservaRepositorio {
                 throw new EntidadNoEncontradaException("No se encontro la reserva a eliminar.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al eliminar la reserva de la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al eliminar la reserva de la base de datos: " + e.getMessage(), e);
         }
     }
 
@@ -132,7 +133,7 @@ public class ReservaDAO implements ReservaRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al contar reservas en la base de datos: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al contar reservas en la base de datos: " + e.getMessage(), e);
         }
         return cantidad;
     }
@@ -166,7 +167,7 @@ public class ReservaDAO implements ReservaRepositorio {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al listar las reservas del cuartel: " + e.getMessage(), e);
+            throw new PersistenciaException("Error al listar las reservas del cuartel: " + e.getMessage(), e);
         }
         return lista;
     }

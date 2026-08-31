@@ -7,6 +7,7 @@ import java.util.Scanner;
 import gestion.militar.Controladores.AsignacionesControlador;
 import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
+import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Asignacion;
 
 public class MenuAsignaciones extends MenuBase {
@@ -63,6 +64,8 @@ public class MenuAsignaciones extends MenuBase {
             System.out.println("Asignacion realizada con exito.");
         } catch (EntidadNoEncontradaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo asignar: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -78,6 +81,8 @@ public class MenuAsignaciones extends MenuBase {
             System.out.println("Asignacion modificada con exito.");
         } catch (EntidadNoEncontradaException | EntidadDuplicadaException e) {
             System.out.println("No se pudo modificar: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -91,6 +96,8 @@ public class MenuAsignaciones extends MenuBase {
             System.out.println("Asignacion encontrada:\n " + asignacion.toString());
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -106,6 +113,8 @@ public class MenuAsignaciones extends MenuBase {
                 System.out.println("No hay asignaciones registradas.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }
@@ -119,6 +128,8 @@ public class MenuAsignaciones extends MenuBase {
             System.out.println("Asignacion eliminada con exito.");
         } catch (EntidadNoEncontradaException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (PersistenciaException e) {
+            System.out.println("Error de base de datos: " + e.getMessage());
         } catch (RuntimeException e) {
             System.out.println("Error tecnico: " + e.getMessage());
         }

@@ -3,6 +3,7 @@ package gestion.militar.Vistas;
 import java.util.Scanner;
 
 import gestion.militar.Enums.CamposPersonaEnum;
+import gestion.militar.Excepciones.PersistenciaException;
 
 public abstract class MenuPersonaBase extends MenuBase {
 
@@ -35,6 +36,8 @@ public abstract class MenuPersonaBase extends MenuBase {
                     // orden al controlador a por método abstracto
                     ejecutarActualizacion(codigo, campoSeleccionado, nuevoValor);
                     System.out.println("Campo actualizado con exito.");
+                } catch (PersistenciaException e) {
+                    System.out.println("Error de base de datos: " + e.getMessage());
                 } catch (RuntimeException e) {
                     System.out.println("No se pudo actualizar: " + e.getMessage());
                 }
