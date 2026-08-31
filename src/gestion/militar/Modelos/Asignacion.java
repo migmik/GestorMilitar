@@ -5,8 +5,8 @@ public class Asignacion {
     private Cuartel cuartel;
 
     public Asignacion(Oficial oficial, Cuartel cuartel) {
-        this.oficial = oficial;
-        this.cuartel = cuartel;
+        setOficial(oficial);
+        setCuartel(cuartel);
     }
 
     public Oficial getOficial() {
@@ -14,6 +14,9 @@ public class Asignacion {
     }
 
     public void setOficial(Oficial oficial) {
+        if (oficial == null) {
+            throw new IllegalArgumentException("El oficial no puede ser nulo.");
+        }
         this.oficial = oficial;
     }
 
@@ -22,6 +25,9 @@ public class Asignacion {
     }
 
     public void setCuartel(Cuartel cuartel) {
+        if (cuartel == null) {
+            throw new IllegalArgumentException("El cuartel no puede ser nulo.");
+        }
         this.cuartel = cuartel;
     }
 

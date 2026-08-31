@@ -6,7 +6,7 @@ public class Cuartel {
     private int capacidad;
 
     public Cuartel(int codigo, String nombre, int capacidad) {
-        this.codigo = codigo;
+        setCodigo(codigo);
         setNombre(nombre);
         setCapacidad(capacidad);
     }
@@ -24,7 +24,7 @@ public class Cuartel {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre es obligatorio.");
         }
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     public int getCodigo() {
@@ -32,6 +32,9 @@ public class Cuartel {
     }
 
     public void setCodigo(int codigo) {
+        if (codigo <= 0) {
+            throw new IllegalArgumentException("El codigo debe ser mayor a cero.");
+        }
         this.codigo = codigo;
     }
 

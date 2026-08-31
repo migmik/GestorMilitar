@@ -14,7 +14,7 @@ public abstract class Persona {
     }
 
     public Persona(int codigo, String dni, String apellido, String nombre) {
-        this.codigo = codigo;
+        setCodigo(codigo);
         setDni(dni);
         setApellido(apellido);
         setNombre(nombre);
@@ -25,6 +25,9 @@ public abstract class Persona {
     }
 
     public void setCodigo(int codigo) {
+        if (codigo <= 0) {
+            throw new IllegalArgumentException("El codigo debe ser mayor a cero.");
+        }
         this.codigo = codigo;
     }
 
@@ -36,10 +39,11 @@ public abstract class Persona {
         if (dni == null || dni.isBlank()) {
             throw new IllegalArgumentException("El DNI no puede estar vacio.");
         }
-        if (!dni.matches("[0-9]{7,8}")) {
+        String dniLimpio = dni.trim();
+        if (!dniLimpio.matches("[0-9]{7,8}")) {
             throw new IllegalArgumentException("El DNI debe contener entre 7 y 8 digitos numericos.");
         }
-        this.dni = dni;
+        this.dni = dniLimpio;
     }
 
     public String getApellido() {
@@ -50,7 +54,7 @@ public abstract class Persona {
         if (apellido == null || apellido.isBlank()) {
             throw new IllegalArgumentException("El apellido es obligatorio.");
         }
-        this.apellido = apellido;
+        this.apellido = apellido.trim();
     }
 
     public String getNombre() {
@@ -61,7 +65,7 @@ public abstract class Persona {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre es obligatorio.");
         }
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     @Override

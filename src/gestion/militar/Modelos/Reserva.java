@@ -5,8 +5,8 @@ public class Reserva {
     private Cuartel cuartel;
 
     public Reserva(Soldado soldado, Cuartel cuartel) {
-        this.soldado = soldado;
-        this.cuartel = cuartel;
+        setSoldado(soldado);
+        setCuartel(cuartel);
     }
 
     public Soldado getSoldado() {
@@ -14,6 +14,9 @@ public class Reserva {
     }
 
     public void setSoldado(Soldado soldado) {
+        if (soldado == null) {
+            throw new IllegalArgumentException("El soldado no puede ser nulo.");
+        }
         this.soldado = soldado;
     }
 
@@ -22,6 +25,9 @@ public class Reserva {
     }
 
     public void setCuartel(Cuartel cuartel) {
+        if (cuartel == null) {
+            throw new IllegalArgumentException("El cuartel no puede ser nulo.");
+        }
         this.cuartel = cuartel;
     }
 
