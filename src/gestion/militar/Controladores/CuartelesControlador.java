@@ -1,25 +1,25 @@
 package gestion.militar.Controladores;
 
 import java.util.List;
-import gestion.militar.DAOS.GenericoDAO;
 import gestion.militar.Enums.CamposCuartelEnum;
 import gestion.militar.Excepciones.CapacidadExcedidaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Modelos.Cuartel;
+import gestion.militar.Repositorios.CuartelRepositorio;
 import gestion.militar.Repositorios.ReservaRepositorio;
 
 public class CuartelesControlador {
-    private final GenericoDAO<Cuartel, Integer> cuartelDAO;
+    private final CuartelRepositorio cuartelRepositorio;
     private final ReservaRepositorio reservaRepositorio;
 
-    public CuartelesControlador(GenericoDAO<Cuartel, Integer> cuartelDAO, ReservaRepositorio reservaRepositorio) {
-        this.cuartelDAO = cuartelDAO;
+    public CuartelesControlador(CuartelRepositorio cuartelRepositorio, ReservaRepositorio reservaRepositorio) {
+        this.cuartelRepositorio = cuartelRepositorio;
         this.reservaRepositorio = reservaRepositorio;
     }
 
     public void ingresar(String nombre, int capacidad) {
         Cuartel cuartel = new Cuartel(nombre, capacidad);
-        cuartelDAO.crear(cuartel);
+        cuartelRepositorio.crear(cuartel);
     }
 
     public void modificar(int codigo, CamposCuartelEnum campo, String nuevoValor) {
@@ -38,19 +38,19 @@ public class CuartelesControlador {
                 cuartel.setCapacidad(nuevaCapacidad);
                 break;
         }
-        cuartelDAO.actualizar(cuartel);
+        cuartelRepositorio.actualizar(cuartel);
     }
 
     public Cuartel consultarPorCodigo(int codigo) {
-        return cuartelDAO.encontrarPorID(codigo).orElseThrow(
+        return cuartelRepositorio.encontrarPorID(codigo).orElseThrow(
                 () -> new EntidadNoEncontradaException("No se encontro ningun cuartel con el codigo " + codigo));
     }
 
     public List<Cuartel> listarTodos() {
-        return cuartelDAO.encontrarTodos();
+        return cuartelRepositorio.encontrarTodos();
     }
 
     public void eliminar(int codigo) {
-        cuartelDAO.eliminar(codigo);
+        cuartelRepositorio.eliminar(codigo);
     }
 }

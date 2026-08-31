@@ -13,8 +13,9 @@ import gestion.militar.Excepciones.EntidadDuplicadaException;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Excepciones.PersistenciaException;
 import gestion.militar.Modelos.Cuartel;
+import gestion.militar.Repositorios.CuartelRepositorio;
 
-public class CuartelDAO implements GenericoDAO<Cuartel, Integer> {
+public class CuartelDAO implements CuartelRepositorio {
 
     private Connection conexion;
 

@@ -2,22 +2,22 @@ package gestion.militar.Controladores;
 
 import java.util.List;
 
-import gestion.militar.DAOS.GenericoDAO;
 import gestion.militar.Enums.CamposPersonaEnum;
 import gestion.militar.Excepciones.EntidadNoEncontradaException;
 import gestion.militar.Modelos.Soldado;
+import gestion.militar.Repositorios.SoldadoRepositorio;
 
 public class SoldadosControlador {
 
-    private final GenericoDAO<Soldado, Integer> soldadoDAO;
+    private final SoldadoRepositorio soldadoRepositorio;
 
-    public SoldadosControlador(GenericoDAO<Soldado, Integer> soldadoDAO) {
-        this.soldadoDAO = soldadoDAO;
+    public SoldadosControlador(SoldadoRepositorio soldadoRepositorio) {
+        this.soldadoRepositorio = soldadoRepositorio;
     }
 
     public void ingresar(String dni, String apellido, String nombre) {
         Soldado soldado = new Soldado(dni, apellido, nombre);
-        soldadoDAO.crear(soldado);
+        soldadoRepositorio.crear(soldado);
     }
 
     public void modificar(int codigo, CamposPersonaEnum campo, String nuevoValor) {
@@ -33,19 +33,19 @@ public class SoldadosControlador {
                 soldado.setApellido(nuevoValor);
                 break;
         }
-        soldadoDAO.actualizar(soldado);
+        soldadoRepositorio.actualizar(soldado);
     }
 
     public Soldado consultarPorCodigo(int codigo) {
-        return soldadoDAO.encontrarPorID(codigo).orElseThrow(
+        return soldadoRepositorio.encontrarPorID(codigo).orElseThrow(
                 () -> new EntidadNoEncontradaException("No se encontro ningun soldado con el codigo " + codigo));
     }
 
     public List<Soldado> listarTodos() {
-        return soldadoDAO.encontrarTodos();
+        return soldadoRepositorio.encontrarTodos();
     }
 
     public void eliminar(int codigo) {
-        soldadoDAO.eliminar(codigo);
+        soldadoRepositorio.eliminar(codigo);
     }
 }

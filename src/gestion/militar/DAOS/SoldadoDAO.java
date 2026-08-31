@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import gestion.militar.Modelos.Soldado;
+import gestion.militar.Repositorios.SoldadoRepositorio;
 
-public class SoldadoDAO extends PersonaDAO<Soldado> {
+public class SoldadoDAO extends PersonaDAO<Soldado> implements SoldadoRepositorio {
 
     public SoldadoDAO(Connection conexion) {
         super(conexion);
